@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Bypass carrier DNS blocks (Globe / DITO). No root — local VPN for DNS only."
+                    android:text="Bypass carrier DNS blocks (Globe / DITO). Local VPN for DNS only."
                     android:textColor="@color/text_dim"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -145,7 +145,7 @@
                             android:id="@+id/rbCloudflare"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="6dp"
                             android:buttonTint="@color/primary"
                             android:checked="true"
                             android:paddingStart="8dp"
@@ -157,7 +157,7 @@
                             android:id="@+id/rbGoogle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="6dp"
                             android:buttonTint="@color/primary"
                             android:paddingStart="8dp"
                             android:text="Google 8.8.8.8"
@@ -168,12 +168,77 @@
                             android:id="@+id/rbQuad9"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
                             android:buttonTint="@color/primary"
                             android:paddingStart="8dp"
                             android:text="Quad9 9.9.9.9"
                             android:textColor="@color/text"
                             android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbAdGuard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:buttonTint="@color/primary"
+                            android:paddingStart="8dp"
+                            android:text="AdGuard 94.140.14.14 (Ad Block)"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbControlD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:buttonTint="@color/primary"
+                            android:paddingStart="8dp"
+                            android:text="Control D 76.76.2.0 (Fast)"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbOpenDns"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:buttonTint="@color/primary"
+                            android:paddingStart="8dp"
+                            android:text="OpenDNS 208.67.222.222"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbCustom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/primary"
+                            android:paddingStart="8dp"
+                            android:text="Custom DNS Server or DoH URL"
+                            android:textColor="@color/text"
+                            android:textSize="15sp" />
                     </RadioGroup>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCustomDns"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="DNS IP (e.g. 1.1.1.1) or DoH URL"
+                        android:textColorHint="@color/text_dim"
+                        android:visibility="gone"
+                        app:boxStrokeColor="@color/primary"
+                        app:hintTextColor="@color/primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCustomDns"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textUri"
+                            android:textColor="@color/text"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Speed Test Section -->
                     <com.google.android.material.button.MaterialButton
@@ -181,7 +246,7 @@
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="14dp"
                         android:text="Test Speed &amp; Select Fastest"
                         android:textColor="@color/accent"
                         app:cornerRadius="12dp"
@@ -197,6 +262,55 @@
                         android:text="Speed: not tested yet"
                         android:textColor="@color/text_dim"
                         android:textSize="13sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Preferences & Settings Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#2A2447"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ADVANCED SETTINGS"
+                        android:textColor="@color/accent"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/swAutoConnect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Auto-connect on Boot"
+                        android:textColor="@color/text"
+                        android:textSize="15sp"
+                        app:thumbTint="@color/primary"
+                        app:trackTint="#409D7BFF" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnExcludeApps"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Split Tunneling (Exclude Apps)"
+                        android:textColor="@color/text"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="#312B52" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -248,7 +362,7 @@
             <!-- Bottom spacer so scroll content clears mascot -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="110dp" />
+                android:layout_height="145dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -256,8 +370,8 @@
     <!-- Cute Mascot on Bottom Right -->
     <ImageView
         android:id="@+id/mascot"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="mascot"
